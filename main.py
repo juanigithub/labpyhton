@@ -58,18 +58,18 @@ def ver_estadisticas(cursos):
     total_inscriptos = 0
     total_espera = 0
     curso_mas_demanda = None
-    max_inscriptos = -1
+    max_demanda = -1
 
-    # Recorremos una sola vez y vamos acumulando todo lo que necesitamos
     for curso in cursos:
         cantidad = len(curso["inscriptos"])
         espera = len(curso["lista_espera"])
+        demanda = cantidad + espera
         
         total_inscriptos += cantidad
         total_espera += espera
 
-        if cantidad > max_inscriptos:
-            max_inscriptos = cantidad
+        if demanda > max_demanda:
+            max_demanda = demanda
             curso_mas_demanda = curso["nombre"]
 
     # 1) Estadísticas de inscriptos
@@ -87,9 +87,9 @@ def ver_estadisticas(cursos):
     if total_espera == 0:
         print("  (No hay estudiantes en lista de espera)")
 
-    # 3) Curso con mayor demanda
+    # 3) Curso con mayor demanda (inscriptos + lista de espera)
     print("\n> Curso con mayor demanda:")
-    print(f"{curso_mas_demanda} con {max_inscriptos} inscriptos")
+    print(f"{curso_mas_demanda} con {max_demanda} personas interesadas (inscriptos + lista de espera)")
 
 #************************************************************************
 #rama de ejecucion del programa
