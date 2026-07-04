@@ -50,6 +50,48 @@ def inscribir_estudiante(cursos):
             return
     print("No existe un curso con ese ID.")
 
+
+#funcion ver estadisticas 
+def ver_estadisticas(cursos):
+    print("\n--- Estadísticas ---")
+    
+    total_inscriptos = 0
+    total_espera = 0
+    curso_mas_demanda = None
+    max_inscriptos = -1
+
+    # Recorremos una sola vez y vamos acumulando todo lo que necesitamos
+    for curso in cursos:
+        cantidad = len(curso["inscriptos"])
+        espera = len(curso["lista_espera"])
+        
+        total_inscriptos += cantidad
+        total_espera += espera
+
+        if cantidad > max_inscriptos:
+            max_inscriptos = cantidad
+            curso_mas_demanda = curso["nombre"]
+
+    # 1) Estadísticas de inscriptos
+    print("\n> Estadísticas de inscriptos:")
+    print(f"Total de estudiantes inscriptos en el sistema: {total_inscriptos}")
+    for curso in cursos:
+        print(f"  - {curso['nombre']}: {len(curso['inscriptos'])} inscriptos")
+
+    # 2) Control de listas de espera
+    print("\n> Control de listas de espera:")
+    print(f"Total de estudiantes en espera: {total_espera}")
+    for curso in cursos:
+        if len(curso["lista_espera"]) > 0:
+            print(f"  - {curso['nombre']}: {len(curso['lista_espera'])} en espera")
+    if total_espera == 0:
+        print("  (No hay estudiantes en lista de espera)")
+
+    # 3) Curso con mayor demanda
+    print("\n> Curso con mayor demanda:")
+    print(f"{curso_mas_demanda} con {max_inscriptos} inscriptos")
+
+#************************************************************************
 #rama de ejecucion del programa
 while True:
     mostrar_menu()
@@ -61,5 +103,7 @@ while True:
         inscribir_estudiante(cursos)
     elif opcion == "2":
         ver_cursos(cursos)  
+    elif opcion == "3":
+        ver_estadisticas(cursos)
     else:
         print("Función aún no implementada")
