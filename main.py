@@ -25,47 +25,53 @@ def ver_cursos(cursos):
         en_espera = len(curso["lista_espera"])
         print(f"ID: {curso['id']} | {curso['nombre']} | Inscriptos: {inscriptos_actual}/{curso['cupo_max']} | Cupos disponibles: {cupo_disponible} | En lista de espera: {en_espera}")
 
-#funcion inscribir estudiantes (el nombre tiene escribirse tal y como esta o no lo tomara)
+#funcion inscribir estudiantes 
 def inscribir_estudiante(cursos):
     ver_cursos(cursos)
-    try:
-        id_curso = int(input("Ingrese el ID del curso: "))
-    except ValueError:
-        print("Debe ingresar un número válido.")
-        return
+    
+    # Repetir hasta que el ID sea válido (numérico Y que exista un curso con ese ID)
+    curso_seleccionado = None
+    while curso_seleccionado is None:
+        try:
+            id_curso = int(input("Ingrese el ID del curso: "))
+        except ValueError:
+            print("Debe ingresar un número válido.")
+            continue
+
+        for curso in cursos:
+            if curso["id"] == id_curso:
+                curso_seleccionado = curso
+                break
+
+        if curso_seleccionado is None:
+            print("No existe un curso con ese ID. Intente nuevamente.")
 
     nombre_estudiante = input("Nombre del estudiante: ")
     while nombre_estudiante.strip() == "":
         print("El nombre no puede estar vacío.")
         nombre_estudiante = input("Nombre del estudiante: ")
 
-    # Repetir hasta que el DNI sea un número válido
     dni_valido = False
     while not dni_valido:
         try:
-            dni_estudiante = int(input("ingrese DNI del estudiante sin puntos ni espacios: "))
+            dni_estudiante = int(input("DNI del estudiante: "))
             dni_valido = True
         except ValueError:
-            print("El DNI debe ser un número válido, respete lo pedido. Intente nuevamente.")
-    for curso in cursos:
-        if curso["id"] == id_curso:
-            
-            # Chequeamos si ese DNI ya está inscripto o en lista de espera en ESTE curso
-            ya_inscripto = any(estudiante["dni"] == dni_estudiante for estudiante in curso["inscriptos"])
-            ya_en_espera = any(estudiante["dni"] == dni_estudiante for estudiante in curso["lista_espera"])
+            print("El DNI debe ser un número válido. Intente nuevamente.")
 
-            if ya_inscripto or ya_en_espera:
-                print(f"El DNI {dni_estudiante} ya está registrado en el curso {curso['nombre']}.")
-                return
+    ya_inscripto = any(estudiante["dni"] == dni_estudiante for estudiante in curso_seleccionado["inscriptos"])
+    ya_en_espera = any(estudiante["dni"] == dni_estudiante for estudiante in curso_seleccionado["lista_espera"])
 
-            if len(curso["inscriptos"]) < curso["cupo_max"]:
-                curso["inscriptos"].append({"nombre": nombre_estudiante, "dni": dni_estudiante})
-                print(f"{nombre_estudiante} inscripto en {curso['nombre']}")
-            else:
-                curso["lista_espera"].append({"nombre": nombre_estudiante, "dni": dni_estudiante})
-                print(f"El curso {curso['nombre']} está lleno. {nombre_estudiante} fue agregado a la lista de espera.")
-            return
-    print("No existe un curso con ese ID.")
+    if ya_inscripto or ya_en_espera:
+        print(f"El DNI {dni_estudiante} ya está registrado en el curso {curso_seleccionado['nombre']}.")
+        return
+
+    if len(curso_seleccionado["inscriptos"]) < curso_seleccionado["cupo_max"]:
+        curso_seleccionado["inscriptos"].append({"nombre": nombre_estudiante, "dni": dni_estudiante})
+        print(f"{nombre_estudiante} inscripto en {curso_seleccionado['nombre']}")
+    else:
+        curso_seleccionado["lista_espera"].append({"nombre": nombre_estudiante, "dni": dni_estudiante})
+        print(f"El curso {curso_seleccionado['nombre']} está lleno. {nombre_estudiante} fue agregado a la lista de espera.")
 
 #funcion ver estadisticas 
 def ver_estadisticas(cursos):
@@ -107,7 +113,7 @@ def ver_estadisticas(cursos):
     print("\n> Curso con mayor demanda:")
     print(f"{curso_mas_demanda} con {max_demanda} personas interesadas (inscriptos + lista de espera)")
 
-
+#como una buena practica, se pone la funcion main para que el programa se ejecute desde ahi y no desde el codigo principal, esto permite que si se importa este archivo en otro, no se ejecute automaticamente
 def main():
     while True:
         mostrar_menu()
