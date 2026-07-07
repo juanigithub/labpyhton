@@ -2,11 +2,11 @@
  **Materia:** Algoritmos y Estructuras de Datos 2026
  **Comisión 1.1 / Grupo A7**
  
- **Integrantes:**
- 1.Juan Ignacio Aguilera
- 2.Valentina Magali Alvira Coseres
- 3.Rocco Agustín Macías
- 4.Jonathan Tomás Zilli Macías
+ ## Integrantes
+- Juan Ignacio Aguilera
+- Valentina Magali Alvira Coseres
+- Rocco Agustín Macías
+- Jonathan Tomás Zilli Macías
 
 **Descripción General del Sistema**
 El escenario asignado consiste en un sistema de inscripción a cursos desarrollado en Python mediante una interfaz de consola. Su objetivo es permitir la gestión básica de inscripciones de estudiantes en distintos cursos, controlando los cupos disponibles y administrando listas de espera cuando los cursos alcanzan su capacidad máxima. 
