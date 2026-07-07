@@ -14,19 +14,36 @@ Cada curso posee un cupo máximo de estudiantes. Cuando dicho cupo se completa, 
 Además, el sistema genera estadísticas sobre la cantidad de inscriptos, estudiantes en espera y el curso con mayor demanda.
 
 ## Instrucciones de Ejecución
-1. Clonar el repositorio:
+
+### 1. Clonar el repositorio
+
+```bash
 git clone https://github.com/juanigithub/labpyhton.git
-2. Acceder a la carpeta del proyecto:
+```
+
+### 2. Acceder a la carpeta del proyecto
+
+```bash
 cd labpyhton
-3. Ejecutar el programa:
+```
+
+### 3. Ejecutar el programa
+
+```bash
 python main.py
-5. Utilizar el menú principal:
+```
+
+### 4. Utilizar el menú principal
+
 Al iniciar el programa se mostrará el siguiente menú:
 
+```text
 --- Menu Sistema de Inscripción ---
+
 1. Inscribir estudiante
 2. Ver cursos y cupos
 3. Ver estadísticas
 0. Salir
+```
 
 Ingrese el número correspondiente a la operación deseada.
