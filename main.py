@@ -8,6 +8,12 @@ cursos = [
 
 #funcion mostrar menu 
 def mostrar_menu():
+    """
+    Muestra por pantalla las opciones disponibles del sistema de inscripción.
+
+    No recibe parámetros ni devuelve ningún valor, solo imprime el menú
+    para que el usuario elija una opción en el bucle principal.
+    """
 
     print("\n--- Menu Sistema de Inscripción ---")
     print("ingrese numero corresondiente a la opcion que desea realizar")
@@ -18,6 +24,21 @@ def mostrar_menu():
 
 #funcion mostrar cursos 
 def ver_cursos(cursos):
+
+    """
+    Muestra por pantalla el listado de cursos con su información actual.
+
+    Para cada curso imprime: ID, nombre, cantidad de inscriptos sobre el
+    cupo máximo, cupos disponibles y cantidad de estudiantes en lista de espera.
+
+    Args:
+        cursos (list[dict]): Lista de cursos del sistema. Cada curso es un
+            diccionario con las claves "id", "nombre", "cupo_max",
+            "inscriptos" y "lista_espera".
+
+    Returns:
+        None
+    """
     print("\n--- Cursos disponibles ---")
     for curso in cursos:
         inscriptos_actual = len(curso["inscriptos"])
@@ -27,6 +48,24 @@ def ver_cursos(cursos):
 
 #funcion inscribir estudiantes 
 def inscribir_estudiante(cursos):
+    
+    """
+    Inscribe a un estudiante en el curso seleccionado por ID.
+
+    Solicita al usuario el ID del curso, el nombre del estudiante y su DNI,
+    validando que los datos sean correctos (nombre no vacío, DNI numérico).
+    Si el curso tiene cupo disponible, inscribe al estudiante; si está
+    lleno, lo agrega a la lista de espera. Evita que un mismo DNI se
+    inscriba dos veces en el mismo curso.
+
+    Args:
+        cursos (list[dict]): Lista de cursos del sistema, la cual se
+            modifica in-place agregando el estudiante a "inscriptos" o
+            "lista_espera" del curso correspondiente.
+
+    Returns:
+        None
+    """
     ver_cursos(cursos)
     
     # Repetir hasta que el ID sea válido (numérico Y que exista un curso con ese ID)
@@ -75,6 +114,22 @@ def inscribir_estudiante(cursos):
 
 #funcion ver estadisticas 
 def ver_estadisticas(cursos):
+
+    """
+    Calcula y muestra las estadísticas generales del sistema.
+
+    Incluye: total de estudiantes inscriptos (general y por curso), total
+    de estudiantes en lista de espera (general y por curso), y el curso
+    con mayor demanda, entendida como la suma de inscriptos más lista de
+    espera de ese curso.
+
+    Args:
+        cursos (list[dict]): Lista de cursos del sistema sobre la cual se
+            calculan los totales. No se modifica.
+
+    Returns:
+        None
+    """
     print("\n--- Estadísticas ---")
     
     total_inscriptos = 0
