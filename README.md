@@ -47,3 +47,25 @@ Al iniciar el programa se mostrará el siguiente menú:
 ```
 
 Ingrese el número correspondiente a la operación deseada.
+
+
+## Uso de Inteligencia Artificial
+
+Durante el desarrollo del proyecto se utilizó Claude (Anthropic) como
+herramienta de apoyo para el aprendizaje y la programación. Concretamente
+se usó para:
+
+ **Planificar el desarrollo**: definir un orden de trabajo progresivo
+  (estructura de datos → menú → funciones → validaciones), pensado para
+  reflejarse en commits incrementales.
+ **Resolver dudas sobre validación de datos ingresados por el usuario**:
+  uso de `try/except` para capturar `ValueError` al pedir números (ID de
+  curso, DNI) y de bucles `while` para repetir la solicitud hasta obtener
+  un dato válido.
+ **Discutir decisiones de diseño**: cómo evitar inscripciones duplicadas
+  usando el DNI del estudiante como identificador único por curso, y cómo
+  definir la "demanda real" de un curso como la suma de sus inscriptos más
+  su lista de espera (en vez de solo los inscriptos).
+
+Todas las soluciones propuestas por la IA fueron analizadas, discutidas y
+comprendidas por el equipo antes de incorporarlas al código.
