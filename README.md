@@ -22,6 +22,7 @@ cd labpyhton
 python main.py
 5. Utilizar el menú principal:
 Al iniciar el programa se mostrará el siguiente menú:
+
 --- Menu Sistema de Inscripción ---
 1. Inscribir estudiante
 2. Ver cursos y cupos
