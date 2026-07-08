@@ -46,7 +46,10 @@ Al iniciar el programa se mostrará el siguiente menú:
 0. Salir
 ```
 
-Ingrese el número correspondiente a la operación deseada.
+Ingrese el número correspondiente a la operación deseada
+Lik del video:
+https://drive.google.com/drive/folders/11xFSI53OiMwnj6KxuiZ2Yk61WmhOKyym?usp=drive_link
+Se encuentra en esta carpeta drive
 
 
 ## Uso de Inteligencia Artificial
